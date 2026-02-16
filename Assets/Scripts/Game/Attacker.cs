@@ -1,16 +1,23 @@
 using UnityEngine;
 
-public class Attacker : MonoBehaviour
+public class Attacker : PlayerUnit
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Bullet bullet;
+    [SerializeField] private float delayBetweenShoots;
 
-    // Update is called once per frame
-    void Update()
+    private Unit target;
+    private float nextTimeToShot;
+
+    private void Update()
     {
-        
+        if (Time.time > nextTimeToShot)
+        {
+            if (target == null)
+            {
+                target = battleManager.GetEnemyUnitToAttack();
+            }
+            Instantiate(bullet).Init(target, damage);
+            nextTimeToShot += delayBetweenShoots;
+        }
     }
 }
