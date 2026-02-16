@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -45.9}
+  m_AnchoredPosition: {x: 0, y: -20.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3054624044058643517
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 111
+  m_text: +111
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279107328
-  m_fontColor: {r: 0, g: 1, b: 0.051775932, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -171,11 +171,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 439600427220433506, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 190
       objectReference: {fileID: 0}
     - target: {fileID: 439600427220433506, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 439600427220433506, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -228,6 +228,18 @@ PrefabInstance:
     - target: {fileID: 6065272827046891482, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_Name
       value: CurrencyOfferSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612560921581210706, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0130f5b6d99581b469eba4e6b510fd4b, type: 3}
+    - target: {fileID: 6688884762791218241, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -12.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688884762791218241, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3677338391548301677, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}

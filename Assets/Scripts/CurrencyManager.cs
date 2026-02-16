@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
-    private int currency;
+    private int currency=1000;
     
     public bool IfEnoughSpend(int price)
     {

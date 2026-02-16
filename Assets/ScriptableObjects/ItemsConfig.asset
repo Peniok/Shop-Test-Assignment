@@ -26,13 +26,13 @@ MonoBehaviour:
   ItemVisualDatas:
   - ItemId: attacker
     ItemName: Shooter
-    Icon: {fileID: 0}
-    Description: 
+    Icon: {fileID: 21300000, guid: ab61a2c53476bca47adbbfe8e881ac41, type: 3}
+    Description: Shooting into enemies
   - ItemId: armored_provoker
     ItemName: Tank
-    Icon: {fileID: 0}
-    Description: 
+    Icon: {fileID: 21300000, guid: 4853080db3e79d840a6e1ab731a26af5, type: 3}
+    Description: Provok Enemies to attack only him
   - ItemId: booster_1
-    ItemName: Booster
-    Icon: {fileID: 0}
-    Description: 
+    ItemName: Damage Boost
+    Icon: {fileID: 21300000, guid: 7b25874dcb9ef2745aae0d002fe0d72a, type: 3}
+    Description: Increasing Damage

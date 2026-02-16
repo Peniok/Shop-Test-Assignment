@@ -17,12 +17,21 @@ MonoBehaviour:
     Price: 100
   CharacterOffers:
   - ItemId: armored_provoker
-    Price: 100
+    Price: 50
   - ItemId: attacker
-    Price: 100
+    Price: 70
   - ItemId: attacker
     Price: 100
   - ItemId: armored_provoker
     Price: 100
-  CurrencyOffers: []
-  CurrencyIcon: {fileID: 0}
+  CurrencyOffers:
+  - ItemId: low_amount_currency
+    Price: 0
+    Value: 100
+  - ItemId: normal_amount_currency
+    Price: 0
+    Value: 300
+  - ItemId: huge_amount_currency
+    Price: 0
+    Value: 700
+  CurrencyIcon: {fileID: 21300000, guid: 0130f5b6d99581b469eba4e6b510fd4b, type: 3}
