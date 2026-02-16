@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2263adb2879e30f428f999f54b667d46, type: 3}
   m_Name: EnemiesConfig
   m_EditorClassIdentifier: Assembly-CSharp::EnemiesConfig
-  HP: 0
-  Damage: 0
+  HP: 100
+  Damage: 20

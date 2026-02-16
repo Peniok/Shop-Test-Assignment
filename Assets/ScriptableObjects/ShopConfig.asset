@@ -16,10 +16,13 @@ MonoBehaviour:
   - ItemId: booster_1
     Price: 100
   CharacterOffers:
-  - ItemId: armored
+  - ItemId: armored_provoker
     Price: 100
   - ItemId: attacker
     Price: 100
+  - ItemId: attacker
+    Price: 100
+  - ItemId: armored_provoker
+    Price: 100
   CurrencyOffers: []
-  ItemVisualDataForItemId: []
   CurrencyIcon: {fileID: 0}

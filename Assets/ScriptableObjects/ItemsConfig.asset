@@ -13,12 +13,26 @@ MonoBehaviour:
   m_Name: ItemsConfig
   m_EditorClassIdentifier: Assembly-CSharp::ItemsConfig
   UnitsConfigs:
-  - ItemId: 
+  - ItemId: attacker
     UnitType: 0
     HP: 50
     Damage: 25
-  - ItemId: 
+  - ItemId: armored_provoker
     UnitType: 1
     HP: 100
     Damage: 0
-  BoosterConfigs: []
+  BoosterConfigs:
+  - ItemId: booster_1
+  ItemVisualDatas:
+  - ItemId: attacker
+    ItemName: Shooter
+    Icon: {fileID: 0}
+    Description: 
+  - ItemId: armored_provoker
+    ItemName: Tank
+    Icon: {fileID: 0}
+    Description: 
+  - ItemId: booster_1
+    ItemName: Booster
+    Icon: {fileID: 0}
+    Description: 

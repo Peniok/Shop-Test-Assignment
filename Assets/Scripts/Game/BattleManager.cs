@@ -20,7 +20,8 @@ public class BattleManager : MonoBehaviour
         onDieAction += OnUnitDie;
         for (int i = 0; i < savesManager.PickedCharactersToBattle.Count; i++)
         {
-            UnitConfig unitConfig = itemsConfig.GetUnitConfig(savesManager.PickedCharactersToBattle[i]);
+            string idOfPickedUnit = savesManager.PurchasedCharactersId[savesManager.PickedCharactersToBattle[i]];
+            UnitConfig unitConfig = itemsConfig.GetUnitConfig(idOfPickedUnit);
             if(unitConfig.UnitType == PlayerUnitType.Attacker)
             {
                 playerUnits.Add(Instantiate(attackerprefab));

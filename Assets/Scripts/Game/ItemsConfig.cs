@@ -8,7 +8,7 @@ public class ItemsConfig : ScriptableObject
     public List<UnitConfig> UnitsConfigs;
     public List<BoosterConfig> BoosterConfigs;
 
-    public List<ItemVisualDataForItemId> ItemVisualDataForItemId;
+    public List<ItemVisualData> ItemVisualDatas;
 
     public UnitConfig GetUnitConfig(string id)
     {
@@ -17,7 +17,7 @@ public class ItemsConfig : ScriptableObject
 
     public ItemVisualData GetItemVisualDataById(string itemId)
     {
-        ItemVisualData itemVisualData = ItemVisualDataForItemId.Find(item => item.ItemId == itemId).VisualItemData;
+        ItemVisualData itemVisualData = ItemVisualDatas.Find(item => item.ItemId == itemId);
 
         if (itemVisualData == null)
         {

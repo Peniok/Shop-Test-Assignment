@@ -1,19 +1,13 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewItem", menuName = "Shop/Item")]
-public class ItemVisualData : ScriptableObject
+[Serializable]
+public class ItemVisualData
 {
+    public string ItemId;
     public string ItemName;
     public Sprite Icon;
     [TextArea] public string Description;
-}
-
-[Serializable]
-public class ItemVisualDataForItemId
-{
-    public string ItemId;
-    public ItemVisualData VisualItemData;
 }
 
 public abstract class OfferData

@@ -6,6 +6,9 @@ public class ShopController : MonoBehaviour
     [SerializeField] private BaseOfferSlot baseOfferPrefab;
     [SerializeField] private BaseOfferSlot currencyOfferPrefab;
     [SerializeField] private BaseOfferSlot boosterOfferSlot;
+    [SerializeField] private Transform baseOfferTransformParent;
+    [SerializeField] private Transform boosterOfferTransformParent;
+    [SerializeField] private Transform currencyOfferTransformParent;
 
     [SerializeField] private ShopConfig shopConfig;
     [SerializeField] private CurrencyManager currencyManager;
@@ -30,7 +33,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < shopConfig.CharacterOffers.Length; i++)
         {
-            Instantiate(baseOfferPrefab).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CharacterOffers[i].ItemId), shopConfig.CharacterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
+            Instantiate(baseOfferPrefab, baseOfferTransformParent).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CharacterOffers[i].ItemId), shopConfig.CharacterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
         }
     }
 
@@ -38,7 +41,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < shopConfig.BoosterOffers.Length; i++)
         {
-            Instantiate(boosterOfferSlot).Setup(itemsConfig.GetItemVisualDataById(shopConfig.BoosterOffers[i].ItemId), shopConfig.BoosterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
+            Instantiate(boosterOfferSlot, boosterOfferTransformParent).Setup(itemsConfig.GetItemVisualDataById(shopConfig.BoosterOffers[i].ItemId), shopConfig.BoosterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
         }
     }
 
@@ -46,7 +49,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < shopConfig.CurrencyOffers.Length; i++)
         {
-            Instantiate(currencyOfferPrefab).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CurrencyOffers[i].ItemId), shopConfig.CurrencyOffers[i], onPurchaseClickAction,onInfoButtonClickAction);
+            Instantiate(currencyOfferPrefab, currencyOfferTransformParent).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CurrencyOffers[i].ItemId), shopConfig.CurrencyOffers[i], onPurchaseClickAction,onInfoButtonClickAction);
         }
     }
 

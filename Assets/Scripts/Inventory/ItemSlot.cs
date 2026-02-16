@@ -26,10 +26,12 @@ public class ItemSlot : MonoBehaviour
     public void SetPicked()
     {
         selectedFrame.SetActive(true);
+        itemChoosedButton.gameObject.SetActive(false);
     }
 
     public void SetUnpicked()
     {
         selectedFrame.SetActive(false);
+        itemChoosedButton.gameObject.SetActive(true);
     }
 }

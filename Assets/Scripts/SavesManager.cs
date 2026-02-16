@@ -3,6 +3,6 @@ using UnityEngine;
 
 public class SavesManager : MonoBehaviour
 {
-    public List<string> PickedCharactersToBattle;
-    public List<string> PurchasedCharacters;
+    public List<int> PickedCharactersToBattle;
+    public List<string> PurchasedCharactersId;
 }
