@@ -4,21 +4,39 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
+    [SerializeField] private ItemsConfig itemsConfig;
+    [SerializeField] private EnemiesConfig enemiesConfig;
+    [SerializeField] private SavesManager savesManager;
+    [SerializeField] private Attacker attackerprefab;
+    [SerializeField] private ArmoredProvoker armoredProvokerPrefab;
+    [SerializeField] private List<Unit> enemyUnits;
+
     private List<Unit> playerUnits;
-    private List<Unit> enemyUnits;
 
     private Action<Unit> onDieAction;
 
     private void Awake()
     {
         onDieAction += OnUnitDie;
-        for (int i = 0; i < playerUnits.Count; i++)
+        for (int i = 0; i < savesManager.PickedCharactersToBattle.Count; i++)
         {
-            playerUnits[0].Init(onDieAction);
+            UnitConfig unitConfig = itemsConfig.GetUnitConfig(savesManager.PickedCharactersToBattle[i]);
+            if(unitConfig.UnitType == PlayerUnitType.Attacker)
+            {
+                playerUnits.Add(Instantiate(attackerprefab));
+            }
+            else if (unitConfig.UnitType == PlayerUnitType.ArmoredProvoker)
+            {
+                playerUnits.Add(Instantiate(armoredProvokerPrefab));
+            }
+
+            playerUnits[i].Init(onDieAction, unitConfig.HP, unitConfig.Damage, this);
         }
-        for (int i = 0; i < playerUnits.Count; i++)
+
+
+        for (int i = 0; i < enemyUnits.Count; i++)
         {
-            enemyUnits[0].Init(onDieAction);
+            enemyUnits[i].Init(onDieAction, enemiesConfig.HP, enemiesConfig.Damage, this);
         }
     }
 

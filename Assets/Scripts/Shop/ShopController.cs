@@ -9,6 +9,7 @@ public class ShopController : MonoBehaviour
 
     [SerializeField] private ShopConfig shopConfig;
     [SerializeField] private CurrencyManager currencyManager;
+    [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private ItemManager itemManager;
     [SerializeField] private DescriptionShower descriptionShower;
 
@@ -29,7 +30,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < shopConfig.CharacterOffers.Length; i++)
         {
-            Instantiate(baseOfferPrefab).Setup(shopConfig.GetItemVisualDataById(shopConfig.CharacterOffers[i].ItemId), shopConfig.CharacterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
+            Instantiate(baseOfferPrefab).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CharacterOffers[i].ItemId), shopConfig.CharacterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
         }
     }
 
@@ -37,7 +38,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < shopConfig.BoosterOffers.Length; i++)
         {
-            Instantiate(boosterOfferSlot).Setup(shopConfig.GetItemVisualDataById(shopConfig.BoosterOffers[i].ItemId), shopConfig.BoosterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
+            Instantiate(boosterOfferSlot).Setup(itemsConfig.GetItemVisualDataById(shopConfig.BoosterOffers[i].ItemId), shopConfig.BoosterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
         }
     }
 
@@ -45,7 +46,7 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < shopConfig.CurrencyOffers.Length; i++)
         {
-            Instantiate(currencyOfferPrefab).Setup(shopConfig.GetItemVisualDataById(shopConfig.CurrencyOffers[i].ItemId), shopConfig.CurrencyOffers[i], onPurchaseClickAction,onInfoButtonClickAction);
+            Instantiate(currencyOfferPrefab).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CurrencyOffers[i].ItemId), shopConfig.CurrencyOffers[i], onPurchaseClickAction,onInfoButtonClickAction);
         }
     }
 
