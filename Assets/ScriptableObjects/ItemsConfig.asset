@@ -19,7 +19,7 @@ MonoBehaviour:
     Damage: 25
   - ItemId: armored_provoker
     UnitType: 1
-    HP: 200
+    HP: 300
     Damage: 0
   BoosterConfigs:
   - ItemId: booster_1

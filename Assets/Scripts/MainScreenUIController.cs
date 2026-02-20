@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +11,21 @@ public class MainScreenUIController : MonoBehaviour
     [SerializeField] private GameObject shopPage;
     [SerializeField] private GameObject mainPage;
     [SerializeField] private GameObject inventoryPage;
-    [SerializeField] private GameObject battleScene;
+    [SerializeField] private BattleManager battleScenePrefab;
+    [SerializeField] private SavesManager savesManager;
 
     [SerializeField] private Button startLevel;
+
+    private Action onBattleEndedAction;
+
     private void Awake()
     {
         mainPageButton.onClick.AddListener(EnableMainPage);
         shopPageButton.onClick.AddListener(EnableShopPage);
         inventoryPageButton.onClick.AddListener(EnableInventoryPage);
         startBattleButton.onClick.AddListener(StartBattle);
+
+        onBattleEndedAction += EnableMainPage;
     }
 
     private void EnableMainPage()
@@ -44,7 +51,7 @@ public class MainScreenUIController : MonoBehaviour
 
     private void StartBattle()
     {
-        battleScene.gameObject.SetActive(true);
+        Instantiate(battleScenePrefab).Init(onBattleEndedAction, savesManager.PurchasedCharactersId, savesManager.PickedCharactersToBattle);
         startBattleButton.gameObject.SetActive(false);
         shopPage.SetActive(false);
         inventoryPage.SetActive(false);

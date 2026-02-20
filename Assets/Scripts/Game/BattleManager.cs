@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ public class BattleManager : MonoBehaviour
 {
     [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private EnemiesConfig enemiesConfig;
-    [SerializeField] private SavesManager savesManager;
     [SerializeField] private Attacker attackerPrefab;
     [SerializeField] private ArmoredProvoker armoredProvokerPrefab;
     [SerializeField] private List<Unit> enemyUnits;
@@ -15,15 +15,18 @@ public class BattleManager : MonoBehaviour
     private List<Unit> playerUnits = new List<Unit>();
 
     private Action<Unit> onDieAction;
+    private Action onBattleEndedAction;
 
-    private void Awake()
+    public void Init(Action onBattleEndedAction,List<string> purchasedCharactersId, List<int> pickedCharactersToBattle)
     {
+        this.onBattleEndedAction = onBattleEndedAction;
+
         onDieAction += OnUnitDie;
-        for (int i = 0; i < savesManager.PickedCharactersToBattle.Count; i++)
+        for (int i = 0; i < pickedCharactersToBattle.Count; i++)
         {
-            string idOfPickedUnit = savesManager.PurchasedCharactersId[savesManager.PickedCharactersToBattle[i]];
+            string idOfPickedUnit = purchasedCharactersId[pickedCharactersToBattle[i]];
             UnitConfig unitConfig = itemsConfig.GetUnitConfig(idOfPickedUnit);
-            if(unitConfig.UnitType == PlayerUnitType.Attacker)
+            if (unitConfig.UnitType == PlayerUnitType.Attacker)
             {
                 playerUnits.Add(Instantiate(attackerPrefab, playerUnitsPlaces[i]));
             }
@@ -72,6 +75,8 @@ public class BattleManager : MonoBehaviour
             {
                 enemyUnits[i].enabled =false;
             }
+
+            StartCoroutine(WaitAndShowEndOfBattle());
         }
         else if (enemyUnits.Count == 0)
         {
@@ -79,6 +84,14 @@ public class BattleManager : MonoBehaviour
             {
                 playerUnits[i].enabled = false;
             }
+
+            StartCoroutine(WaitAndShowEndOfBattle());
         }
+    }
+    IEnumerator WaitAndShowEndOfBattle()
+    {
+        yield return new WaitForSeconds(1);
+        onBattleEndedAction.Invoke();
+        Destroy(gameObject);
     }
 }
