@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour
 {
-    [SerializeField] private EnemiesConfig enemiesConfig;
     [SerializeField] private Attacker attackerPrefab;
     [SerializeField] private ArmoredProvoker armoredProvokerPrefab;
     [SerializeField] private List<Unit> enemyUnits;
@@ -40,7 +39,7 @@ public class BattleController : MonoBehaviour
 
         for (int i = 0; i < enemyUnits.Count; i++)
         {
-            enemyUnits[i].Init(onDieAction, enemiesConfig.HP, enemiesConfig.Damage, this);
+            enemyUnits[i].Init(onDieAction, GameServices.EnemiesConfig.HP, GameServices.EnemiesConfig.Damage, this);
         }
     }
 

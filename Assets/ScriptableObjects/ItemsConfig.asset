@@ -36,3 +36,8 @@ MonoBehaviour:
     ItemName: Damage Boost
     Icon: {fileID: 8580286285322991341, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
     Description: Increasing Damage
+  CurrencyItemVisualData:
+    ItemId: currency
+    ItemName: Bucks
+    Icon: {fileID: 21300000, guid: 0130f5b6d99581b469eba4e6b510fd4b, type: 3}
+    Description: 

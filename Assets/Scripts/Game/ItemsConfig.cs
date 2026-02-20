@@ -10,12 +10,14 @@ public class ItemsConfig : ScriptableObject
 
     public List<ItemVisualData> ItemVisualDatas;
 
+    public ItemVisualData CurrencyItemVisualData;
+
     public UnitConfig GetUnitConfig(string id)
     {
         return UnitsConfigs.Find(config => config.ItemId == id);
     }
 
-    public ItemVisualData GetItemVisualDataById(string itemId)
+    public ItemVisualData GetItemVisualData(string itemId)
     {
         ItemVisualData itemVisualData = ItemVisualDatas.Find(item => item.ItemId == itemId);
 

@@ -35,7 +35,7 @@ public abstract class BaseOffersGroupController : MonoBehaviour
 
     protected virtual ItemVisualData GetItemVisualForOffers(OfferData offerData)
     {
-        return GameServices.ItemsConfig.GetItemVisualDataById(offerData.ItemId);
+        return GameServices.ItemsConfig.GetItemVisualData(offerData.ItemId);
     }
 
     protected abstract OfferData[] GetOffers();

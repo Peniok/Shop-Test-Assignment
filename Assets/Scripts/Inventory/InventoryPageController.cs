@@ -29,7 +29,7 @@ public class InventoryPageController : MonoBehaviour
     public void AddItem(string characterId)
     {
         ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemSlotsParent);
-        itemSlot.Setup(GameServices.ItemsConfig.GetItemVisualDataById(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
+        itemSlot.Setup(GameServices.ItemsConfig.GetItemVisualData(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
         allItems.Add(itemSlot);
     }
 

@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1486366558406620353, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6065272827046891482, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_Name
       value: CurrencyOfferSlot

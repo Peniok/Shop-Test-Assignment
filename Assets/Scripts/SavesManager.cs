@@ -7,7 +7,7 @@ public class SavesManager
     public List<string> PurchasedCharactersId = new List<string>();
     public List<string> PurchasedOneTimeOffers = new List<string>();
 
-    public static int MaxCountOfPickedCharacters;
+    public static int MaxCountOfPickedCharacters=3;
 
     public SavesManager()
     {

@@ -8,6 +8,4 @@ public class ShopConfig : ScriptableObject
     public BoosterOfferData[] BoosterOffers;
     public CharacterOfferData[] CharacterOffers;
     public CurrencyOfferData[] CurrencyOffers;
-
-    public Sprite CurrencyIcon;
 }
