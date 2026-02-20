@@ -6,7 +6,7 @@ public class CurrencyOfferSlot : BaseOfferSlot
 {
     [SerializeField] private TextMeshProUGUI amountOfCurrencyToReceive;
 
-    public override void Setup(ItemVisualData data, OfferData offerData, Action<OfferData, ItemVisualData> onPurchaseClicked, Action<string> infoButtonClicked)
+    public override void Setup(ItemVisualData data, OfferData offerData, Action<BaseOfferSlot> onPurchaseClicked, Action<string> infoButtonClicked)
     {
         base.Setup(data, offerData, onPurchaseClicked, infoButtonClicked);
 

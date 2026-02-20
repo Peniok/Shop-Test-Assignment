@@ -12,7 +12,9 @@ public class ItemVisualData
 
 public abstract class OfferData
 {
+    public string OfferId;
     public string ItemId;
+    public bool IsOneTimePurchasable;
     public int Price;
     public PriceType PriceType;
 

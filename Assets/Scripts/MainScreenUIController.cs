@@ -34,6 +34,8 @@ public class MainScreenUIController : MonoBehaviour
 
     private void EnableMainPage()
     {
+        gameObject.SetActive(true);
+
         mainPage.SetActive(true);
         shopPage.SetActive(false);
         inventoryPage.SetActive(false);
@@ -67,9 +69,9 @@ public class MainScreenUIController : MonoBehaviour
         if (savesManager.PickedCharactersToBattle.Count != 0)
         {
             Instantiate(battleScenePrefab).Init(onBattleEndedAction, savesManager.PurchasedCharactersId, savesManager.PickedCharactersToBattle);
-            startBattleButton.gameObject.SetActive(false);
             shopPage.SetActive(false);
             inventoryPage.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

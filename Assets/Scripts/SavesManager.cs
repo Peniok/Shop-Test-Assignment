@@ -5,6 +5,7 @@ public class SavesManager : MonoBehaviour
 {
     public List<int> PickedCharactersToBattle; // index of item in PurchasedCharactersList (working as uniqueItemIdLogic)
     public List<string> PurchasedCharactersId;
+    public List<string> PurchasedOneTimeOffers;
 
     public void AddCharacterToBattle(int indexOfNewPickedCharacter)
     {
@@ -19,6 +20,10 @@ public class SavesManager : MonoBehaviour
     public void AddPurchasedCharactersId(string id)
     {
         PurchasedCharactersId.Add(id);
+    }
 
+    public void AddPurchasedOffer(string purchasedOffers)
+    {
+        PurchasedOneTimeOffers.Add(purchasedOffers);
     }
 }

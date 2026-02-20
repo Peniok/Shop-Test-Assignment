@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ShopController : MonoBehaviour
 {
     [SerializeField] private ShopConfig shopConfig;
+    [SerializeField] private SavesManager savesManager;
     [SerializeField] private CurrencyManager currencyManager;
     [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private ItemsManager itemManager;
@@ -15,7 +16,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private RectTransform layoutRoot;
     [SerializeField] private PurchaseFeedbackScreen purchaseFeedbackScreen;
 
-    private Action<OfferData, ItemVisualData> onPurchaseClickAction;
+    private Action<BaseOfferSlot> onPurchaseClickAction;
     private Action<string> onInfoButtonClickAction;
 
     private void Awake()
@@ -37,21 +38,27 @@ public class ShopController : MonoBehaviour
     {
         for (int i = 0; i < offersGroupControllers.Length; i++)
         {
-            offersGroupControllers[i].Init(itemsConfig, shopConfig, onPurchaseClickAction, onInfoButtonClickAction);
+            offersGroupControllers[i].Init(savesManager,itemsConfig, shopConfig, onPurchaseClickAction, onInfoButtonClickAction);
         }
     }
 
 
-    private void OnPurchaseButtonClicked(OfferData offerData,ItemVisualData itemVisualData)
+    private void OnPurchaseButtonClicked(BaseOfferSlot baseOfferSlot)
     {
-        if(offerData.PriceType == PriceType.RealMoney && TrySpendRealMoney() 
-            || (offerData.PriceType == PriceType.Currency && currencyManager.IfEnoughSpend(offerData.Price)))
+        if(baseOfferSlot.OfferData.PriceType == PriceType.RealMoney && TrySpendRealMoney() 
+            || (baseOfferSlot.OfferData.PriceType == PriceType.Currency && currencyManager.IfEnoughSpend(baseOfferSlot.OfferData.Price)))
         {
-            itemManager.AddItem(offerData);
+            itemManager.AddItem(baseOfferSlot.OfferData);
 
+            purchaseFeedbackScreen.ShowPurchase(baseOfferSlot.ItemVisualData);
+
+            if (baseOfferSlot.OfferData.IsOneTimePurchasable)
+            {
+                savesManager.AddPurchasedOffer(baseOfferSlot.OfferData.OfferId);
+                baseOfferSlot.gameObject.SetActive(false);
+                StartCoroutine(ForceRebuildLayoutCall());
+            }
         }
-
-        purchaseFeedbackScreen.ShowPurchase(itemVisualData);
     }
 
     private bool TrySpendRealMoney()
