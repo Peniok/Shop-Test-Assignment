@@ -13,12 +13,19 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 10);
-
-        if(Vector3.Distance(transform.position, target.transform.position) < 1)
+        if (target == null)
         {
-            target.Damage(damage);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 10);
+
+            if (Vector3.Distance(transform.position, target.transform.position) < 1)
+            {
+                target.Damage(damage);
+                Destroy(gameObject);
+            }
         }
     }
 }

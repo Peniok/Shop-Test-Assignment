@@ -6,9 +6,11 @@ public class MainScreenUIController : MonoBehaviour
     [SerializeField] private Button shopPageButton;
     [SerializeField] private Button inventoryPageButton;
     [SerializeField] private Button mainPageButton;
+    [SerializeField] private Button startBattleButton;
     [SerializeField] private GameObject shopPage;
     [SerializeField] private GameObject mainPage;
     [SerializeField] private GameObject inventoryPage;
+    [SerializeField] private GameObject battleScene;
 
     [SerializeField] private Button startLevel;
     private void Awake()
@@ -16,6 +18,7 @@ public class MainScreenUIController : MonoBehaviour
         mainPageButton.onClick.AddListener(EnableMainPage);
         shopPageButton.onClick.AddListener(EnableShopPage);
         inventoryPageButton.onClick.AddListener(EnableInventoryPage);
+        startBattleButton.onClick.AddListener(StartBattle);
     }
 
     private void EnableMainPage()
@@ -37,5 +40,13 @@ public class MainScreenUIController : MonoBehaviour
         mainPage.SetActive(false);
         shopPage.SetActive(false);
         inventoryPage.SetActive(true);
+    }
+
+    private void StartBattle()
+    {
+        battleScene.gameObject.SetActive(true);
+        startBattleButton.gameObject.SetActive(false);
+        shopPage.SetActive(false);
+        inventoryPage.SetActive(false);
     }
 }

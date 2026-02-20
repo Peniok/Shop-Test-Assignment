@@ -7,11 +7,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private EnemiesConfig enemiesConfig;
     [SerializeField] private SavesManager savesManager;
-    [SerializeField] private Attacker attackerprefab;
+    [SerializeField] private Attacker attackerPrefab;
     [SerializeField] private ArmoredProvoker armoredProvokerPrefab;
     [SerializeField] private List<Unit> enemyUnits;
+    [SerializeField] private List<Transform> playerUnitsPlaces;
 
-    private List<Unit> playerUnits;
+    private List<Unit> playerUnits = new List<Unit>();
 
     private Action<Unit> onDieAction;
 
@@ -24,11 +25,11 @@ public class BattleManager : MonoBehaviour
             UnitConfig unitConfig = itemsConfig.GetUnitConfig(idOfPickedUnit);
             if(unitConfig.UnitType == PlayerUnitType.Attacker)
             {
-                playerUnits.Add(Instantiate(attackerprefab));
+                playerUnits.Add(Instantiate(attackerPrefab, playerUnitsPlaces[i]));
             }
             else if (unitConfig.UnitType == PlayerUnitType.ArmoredProvoker)
             {
-                playerUnits.Add(Instantiate(armoredProvokerPrefab));
+                playerUnits.Add(Instantiate(armoredProvokerPrefab, playerUnitsPlaces[i]));
             }
 
             playerUnits[i].Init(onDieAction, unitConfig.HP, unitConfig.Damage, this);
@@ -67,11 +68,17 @@ public class BattleManager : MonoBehaviour
         enemyUnits.Remove(unit);
         if (playerUnits.Count == 0)
         {
-
+            for (int i = 0; i < enemyUnits.Count; i++)
+            {
+                enemyUnits[i].enabled =false;
+            }
         }
         else if (enemyUnits.Count == 0)
         {
-
+            for (int i = 0; i < enemyUnits.Count; i++)
+            {
+                playerUnits[i].enabled = false;
+            }
         }
     }
 }

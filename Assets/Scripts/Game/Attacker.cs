@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Attacker : PlayerUnit
@@ -8,6 +9,13 @@ public class Attacker : PlayerUnit
     private Unit target;
     private float nextTimeToShot;
 
+    public override void Init(Action<Unit> onDieAction, int hp, float damage, BattleManager battleManager)
+    {
+        base.Init(onDieAction, hp, damage, battleManager);
+
+        nextTimeToShot = Time.time + delayBetweenShoots;
+    }
+
     private void Update()
     {
         if (Time.time > nextTimeToShot)
@@ -16,7 +24,7 @@ public class Attacker : PlayerUnit
             {
                 target = battleManager.GetEnemyUnitToAttack();
             }
-            Instantiate(bullet).Init(target, damage);
+            Instantiate(bullet, transform.position,Quaternion.identity, transform.parent).Init(target, damage);
             nextTimeToShot += delayBetweenShoots;
         }
     }
