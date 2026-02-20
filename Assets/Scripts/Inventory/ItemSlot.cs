@@ -11,16 +11,13 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] protected Button infoButton;
     [SerializeField] protected Button itemChoosedButton;
 
-    public virtual void Setup(ItemVisualData data, string id, Action<string> infoButtonClicked, Action<string> itemChoosedClicked)
+    public virtual void Setup(ItemVisualData data, string id, Action<string> infoButtonClicked, Action<ItemSlot> itemChoosedClicked)
     {
         nameText.text = data.ItemName;
         iconImage.sprite = data.Icon;
 
         infoButton.onClick.AddListener(() => infoButtonClicked?.Invoke(data.Description));
-        itemChoosedButton.onClick.AddListener(() => itemChoosedClicked?.Invoke(id));
-        itemChoosedButton.onClick.AddListener(SetPicked);
-
-        selectedFrame.SetActive(true);
+        itemChoosedButton.onClick.AddListener(() => itemChoosedClicked?.Invoke(this));
     }
 
     public void SetPicked()

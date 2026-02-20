@@ -7,44 +7,76 @@ public class InventoryPageController : MonoBehaviour
     [SerializeField] private SavesManager savesManager;
     [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private ItemSlot itemSlotPrefab;
+    [SerializeField] private Transform itemSlotsParent;
+    [SerializeField] private DescriptionShower descriptionShower;
 
-    private Action<string> onCharacterChoosedAction;
+    private Action<ItemSlot> onCharacterChoosedAction;
     private Action<string> onInfoButtonClickAction;
 
     private List<ItemSlot> allItems = new List<ItemSlot>();
 
-    private Transform itemsHolder;
-
     private void Awake()
     {
-        SpawnItems();
         onCharacterChoosedAction += PickCharacterToBattle;
+        onInfoButtonClickAction += descriptionShower.Show;
+
+        SpawnItems();
+    }
+
+    private void OnEnable()
+    {
+        SpawnNotEnoughItems();
     }
 
     private void SpawnItems()
     {
         for (int i = 0; i < savesManager.PurchasedCharactersId.Count; i++)
         {
-            ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemsHolder);
-            itemSlot.Setup(itemsConfig.GetItemVisualDataById(savesManager.PurchasedCharactersId[i]), savesManager.PurchasedCharactersId[i], onInfoButtonClickAction, onCharacterChoosedAction);
-            allItems.Add(itemSlot);
+            AddItem(savesManager.PurchasedCharactersId[i]);
         }
+
+        SetPickedCharcters();
     }
 
-    private void PickCharacterToBattle(string characterId)
+    public void AddItem(string characterId)
     {
-        int indexOfNewPickedCharacter = savesManager.PurchasedCharactersId.FindIndex(id => id == characterId);
-        if (savesManager.PurchasedCharactersId.Count == 3)
+        ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemSlotsParent);
+        itemSlot.Setup(itemsConfig.GetItemVisualDataById(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
+        allItems.Add(itemSlot);
+    }
+
+    private void SetPickedCharcters()
+    {
+        for (int i = 0; i < allItems.Count; i++)
         {
-            allItems[savesManager.PickedCharactersToBattle[0]].SetUnpicked();
+            if (savesManager.PickedCharactersToBattle.Contains(i))
+            {
+                allItems[i].SetPicked();
+            }
+            else
+            {
+                allItems[i].SetUnpicked();
+            }
         }
-
-        savesManager.PickedCharactersToBattle.Insert(0, indexOfNewPickedCharacter);
-        allItems[savesManager.PickedCharactersToBattle[0]].SetPicked();
     }
 
-    public void AddItem()
+    private void SpawnNotEnoughItems()
     {
+        if (allItems.Count < savesManager.PurchasedCharactersId.Count)
+        {
+            for (int i = allItems.Count; i < savesManager.PurchasedCharactersId.Count; i++)
+            {
+                AddItem(savesManager.PurchasedCharactersId[i]);
+            }
+        }
+    }
 
+    private void PickCharacterToBattle(ItemSlot pickedItemSlot)
+    {
+        int indexOfNewPickedCharacter = allItems.IndexOf(pickedItemSlot);
+
+        savesManager.AddCharacterToBattle(indexOfNewPickedCharacter);
+
+        SetPickedCharcters();
     }
 }
