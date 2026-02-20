@@ -589,7 +589,7 @@ TextureImporter:
         height: 179
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 46, y: 46, z: 46, w: 46}
       customData: 
       outline: []
       physicsShape: []
@@ -2235,6 +2235,7 @@ TextureImporter:
       UI-pack_Sprite_1_79: 7887720934130920627
       UI-pack_Sprite_1_8: 9136243195103690455
       UI-pack_Sprite_1_80: 4919465289085303430
+      UI-pack_Sprite_1_81: 1955514863
       UI-pack_Sprite_1_9: 6344727610479804966
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

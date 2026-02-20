@@ -31,7 +31,6 @@ public class ShopController : MonoBehaviour
     {
         yield return null;
         LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
-
     }
 
     private void LoadOffers()
