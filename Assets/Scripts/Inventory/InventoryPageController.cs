@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class InventoryPageController : MonoBehaviour
 {
-    [SerializeField] private SavesManager savesManager;
-    [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private ItemSlot itemSlotPrefab;
     [SerializeField] private Transform itemSlotsParent;
     [SerializeField] private DescriptionShower descriptionShower;
@@ -31,15 +29,15 @@ public class InventoryPageController : MonoBehaviour
     public void AddItem(string characterId)
     {
         ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemSlotsParent);
-        itemSlot.Setup(itemsConfig.GetItemVisualDataById(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
+        itemSlot.Setup(GameServices.ItemsConfig.GetItemVisualDataById(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
         allItems.Add(itemSlot);
     }
 
     private void SpawnItems()
     {
-        for (int i = 0; i < savesManager.PurchasedCharactersId.Count; i++)
+        for (int i = 0; i < GameServices.SavesManager.PurchasedCharactersId.Count; i++)
         {
-            AddItem(savesManager.PurchasedCharactersId[i]);
+            AddItem(GameServices.SavesManager.PurchasedCharactersId[i]);
         }
 
         SetPickedCharcters();
@@ -49,7 +47,7 @@ public class InventoryPageController : MonoBehaviour
     {
         for (int i = 0; i < allItems.Count; i++)
         {
-            if (savesManager.PickedCharactersToBattle.Contains(i))
+            if (GameServices.SavesManager.PickedCharactersToBattle.Contains(i))
             {
                 allItems[i].SetPicked();
             }
@@ -62,11 +60,11 @@ public class InventoryPageController : MonoBehaviour
 
     private void SpawnNotEnoughItems()
     {
-        if (allItems.Count < savesManager.PurchasedCharactersId.Count)
+        if (allItems.Count < GameServices.SavesManager.PurchasedCharactersId.Count)
         {
-            for (int i = allItems.Count; i < savesManager.PurchasedCharactersId.Count; i++)
+            for (int i = allItems.Count; i < GameServices.SavesManager.PurchasedCharactersId.Count; i++)
             {
-                AddItem(savesManager.PurchasedCharactersId[i]);
+                AddItem(GameServices.SavesManager.PurchasedCharactersId[i]);
             }
         }
     }
@@ -75,7 +73,7 @@ public class InventoryPageController : MonoBehaviour
     {
         int indexOfNewPickedCharacter = allItems.IndexOf(pickedItemSlot);
 
-        savesManager.AddCharacterToBattle(indexOfNewPickedCharacter);
+        GameServices.SavesManager.AddCharacterToBattle(indexOfNewPickedCharacter);
 
         SetPickedCharcters();
     }

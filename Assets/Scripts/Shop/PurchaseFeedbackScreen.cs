@@ -10,14 +10,15 @@ public class PurchaseFeedbackScreen : MonoBehaviour
 
     private void Awake()
     {
+        GameServices.PurchasingService.OnPurchaseCompleted += ShowPurchase;
         closeButton.onClick.AddListener(Hide);
     }
 
-    public void ShowPurchase(ItemVisualData itemVisualData)
+    public void ShowPurchase(PurchasedOfferModel purchasedOfferModel)
     {
         gameObject.SetActive(true);
-        image.sprite = itemVisualData.Icon;
-        nameText.text = itemVisualData.ItemName;
+        image.sprite = purchasedOfferModel.ItemVisualData.Icon;
+        nameText.text = purchasedOfferModel.ItemVisualData.ItemName;
     }
 
     public void Hide()

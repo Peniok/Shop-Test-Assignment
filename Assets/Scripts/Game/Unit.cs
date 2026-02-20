@@ -6,10 +6,10 @@ public abstract class Unit : MonoBehaviour
     private float hp;
     protected float damage;
 
-    protected BattleManager battleManager;
+    protected BattleController battleManager;
     private Action<Unit> onDieAction;
 
-    public virtual void Init(Action<Unit> onDieAction, int hp, float damage, BattleManager battleManager)
+    public virtual void Init(Action<Unit> onDieAction, int hp, float damage, BattleController battleManager)
     {
         this.hp = hp;
         this.damage = hp;

@@ -9,7 +9,7 @@ public class EnemyUnit : Unit
     private Unit target;
     private float nextTimeToShot;
 
-    public override void Init(Action<Unit> onDieAction, int hp, float damage, BattleManager battleManager)
+    public override void Init(Action<Unit> onDieAction, int hp, float damage, BattleController battleManager)
     {
         base.Init(onDieAction, hp, damage, battleManager);
 

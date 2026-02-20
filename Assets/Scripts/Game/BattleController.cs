@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+public class BattleController : MonoBehaviour
 {
-    [SerializeField] private ItemsConfig itemsConfig;
     [SerializeField] private EnemiesConfig enemiesConfig;
     [SerializeField] private Attacker attackerPrefab;
     [SerializeField] private ArmoredProvoker armoredProvokerPrefab;
@@ -25,7 +24,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < pickedCharactersToBattle.Count; i++)
         {
             string idOfPickedUnit = purchasedCharactersId[pickedCharactersToBattle[i]];
-            UnitConfig unitConfig = itemsConfig.GetUnitConfig(idOfPickedUnit);
+            UnitConfig unitConfig = GameServices.ItemsConfig.GetUnitConfig(idOfPickedUnit);
             if (unitConfig.UnitType == PlayerUnitType.Attacker)
             {
                 playerUnits.Add(Instantiate(attackerPrefab, playerUnitsPlaces[i]));

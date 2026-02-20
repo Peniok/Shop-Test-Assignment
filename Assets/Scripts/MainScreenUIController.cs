@@ -13,8 +13,7 @@ public class MainScreenUIController : MonoBehaviour
     [SerializeField] private GameObject mainPage;
     [SerializeField] private GameObject inventoryPage;
     [SerializeField] private GameObject pickMinimumOnePlayerNotif;
-    [SerializeField] private BattleManager battleScenePrefab;
-    [SerializeField] private SavesManager savesManager;
+    [SerializeField] private BattleController battleScenePrefab;
 
     [SerializeField] private Button startLevel;
 
@@ -40,7 +39,7 @@ public class MainScreenUIController : MonoBehaviour
         shopPage.SetActive(false);
         inventoryPage.SetActive(false);
 
-        if (savesManager.PickedCharactersToBattle.Count == 0)
+        if (GameServices.SavesManager.PickedCharactersToBattle.Count == 0)
         {
             pickMinimumOnePlayerNotif.SetActive(true);
         }
@@ -66,9 +65,9 @@ public class MainScreenUIController : MonoBehaviour
 
     private void StartBattle()
     {
-        if (savesManager.PickedCharactersToBattle.Count != 0)
+        if (GameServices.SavesManager.PickedCharactersToBattle.Count != 0)
         {
-            Instantiate(battleScenePrefab).Init(onBattleEndedAction, savesManager.PurchasedCharactersId, savesManager.PickedCharactersToBattle);
+            Instantiate(battleScenePrefab).Init(onBattleEndedAction, GameServices.SavesManager.PurchasedCharactersId, GameServices.SavesManager.PickedCharactersToBattle);
             shopPage.SetActive(false);
             inventoryPage.SetActive(false);
             gameObject.SetActive(false);

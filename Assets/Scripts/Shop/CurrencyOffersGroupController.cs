@@ -5,16 +5,16 @@ public class CurrencyOffersGroupController : BaseOffersGroupController
 {
     private ItemVisualData itemVisualData;
 
-    public override void Init(SavesManager savesManager,ItemsConfig itemsConfig, ShopConfig shopConfig, Action<BaseOfferSlot> onPurchaseClickAction, Action<string> onInfoButtonClickAction)
+    public override void Init(Action<string> onInfoButtonClickAction)
     {
-        PrepareItemVisualData(shopConfig.CurrencyIcon);
+        PrepareItemVisualData(GameServices.ShopConfig.CurrencyIcon);
 
-        base.Init(savesManager,itemsConfig, shopConfig, onPurchaseClickAction, onInfoButtonClickAction);
+        base.Init(onInfoButtonClickAction);
     }
 
     protected override OfferData[] GetOffers()
     {
-        return shopConfig.CurrencyOffers;
+        return GameServices.ShopConfig.CurrencyOffers;
     }
 
     protected override ItemVisualData GetItemVisualForOffers(OfferData offerData)

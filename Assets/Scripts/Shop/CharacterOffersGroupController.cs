@@ -4,6 +4,6 @@ public class CharacterOffersGroupController : BaseOffersGroupController
 {
     protected override OfferData[] GetOffers()
     {
-        return shopConfig.CharacterOffers;
+        return GameServices.ShopConfig.CharacterOffers;
     }
 }

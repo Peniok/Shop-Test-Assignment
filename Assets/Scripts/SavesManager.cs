@@ -1,17 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SavesManager : MonoBehaviour
+public class SavesManager
 {
-    public List<int> PickedCharactersToBattle; // index of item in PurchasedCharactersList (working as uniqueItemIdLogic)
-    public List<string> PurchasedCharactersId;
-    public List<string> PurchasedOneTimeOffers;
+    public List<int> PickedCharactersToBattle = new List<int>(); // index of item in PurchasedCharactersList (working as uniqueItemIdLogic)
+    public List<string> PurchasedCharactersId = new List<string>();
+    public List<string> PurchasedOneTimeOffers = new List<string>();
+
+    public static int MaxCountOfPickedCharacters;
+
+    public SavesManager()
+    {
+        GameServices.PurchasingService.OnPurchaseCompleted += OnPurchaseComplete;
+    }
 
     public void AddCharacterToBattle(int indexOfNewPickedCharacter)
     {
         PickedCharactersToBattle.Insert(0, indexOfNewPickedCharacter);
 
-        if (PickedCharactersToBattle.Count == 4) // Max Can be 3 Picked characters
+        if (PickedCharactersToBattle.Count == MaxCountOfPickedCharacters) // Max Can be 3 Picked characters
         {
             PickedCharactersToBattle.RemoveAt(3);
         }
@@ -22,8 +29,12 @@ public class SavesManager : MonoBehaviour
         PurchasedCharactersId.Add(id);
     }
 
-    public void AddPurchasedOffer(string purchasedOffers)
+    public void OnPurchaseComplete(PurchasedOfferModel purchasedOfferModel)
     {
-        PurchasedOneTimeOffers.Add(purchasedOffers);
+        if (purchasedOfferModel.OfferData.IsOneTimePurchasable)
+        {
+            PurchasedOneTimeOffers.Add(purchasedOfferModel.OfferData.OfferId);
+        }
+
     }
 }

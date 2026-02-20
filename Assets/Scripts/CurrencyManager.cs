@@ -1,23 +1,18 @@
+using System;
 using TMPro;
 using UnityEngine;
 
-public class CurrencyManager : MonoBehaviour
+public class CurrencyManager
 {
-    [SerializeField] private TextMeshProUGUI currencyText;
-
-    private int currency=1000;
-
-    private void Awake()
-    {
-        currencyText.text = currency.ToString();
-    }
+    public int Currency { get; private set; } = 1000;
+    public Action<int> OnCurrencyAmountChanged;
 
     public bool IfEnoughSpend(int price)
     {
-        if(currency >= price)
+        if(Currency >= price)
         {
-            currency -= price;
-            currencyText.text = currency.ToString();
+            Currency -= price;
+            OnCurrencyAmountChanged.Invoke(Currency);
             return true;
         }
         return false;
@@ -25,7 +20,7 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddCurrency(int amountOfAddedCurrency)
     {
-        currency += amountOfAddedCurrency;
-        currencyText.text = currency.ToString();
+        Currency += amountOfAddedCurrency;
+        OnCurrencyAmountChanged.Invoke(Currency);
     }
 }
