@@ -24,14 +24,7 @@ public class BattleController : MonoBehaviour
         {
             string idOfPickedUnit = purchasedCharactersId[pickedCharactersToBattle[i]];
             UnitConfig unitConfig = GameServices.ItemsConfig.GetUnitConfig(idOfPickedUnit);
-            if (unitConfig.UnitType == PlayerUnitType.Attacker)
-            {
-                playerUnits.Add(Instantiate(attackerPrefab, playerUnitsPlaces[i]));
-            }
-            else if (unitConfig.UnitType == PlayerUnitType.ArmoredProvoker)
-            {
-                playerUnits.Add(Instantiate(armoredProvokerPrefab, playerUnitsPlaces[i]));
-            }
+            playerUnits.Add(Instantiate(unitConfig.Prefab, playerUnitsPlaces[i]));
 
             playerUnits[i].Init(onDieAction, unitConfig.HP, unitConfig.Damage, this);
         }

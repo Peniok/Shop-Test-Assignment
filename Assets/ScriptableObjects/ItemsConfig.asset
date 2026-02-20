@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemsConfig
   UnitsConfigs:
   - ItemId: attacker
-    UnitType: 0
     HP: 50
     Damage: 25
+    Prefab: {fileID: 8165409504815687817, guid: a0f93103a3617e141955d3d539009045, type: 3}
   - ItemId: armored_provoker
-    UnitType: 1
     HP: 300
     Damage: 0
+    Prefab: {fileID: 7516684610878533318, guid: 8cab2efb8c305d0409d6f26d888450e6, type: 3}
   BoosterConfigs:
   - ItemId: booster_damage
   ItemVisualDatas:

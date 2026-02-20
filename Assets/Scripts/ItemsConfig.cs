@@ -34,9 +34,9 @@ public class ItemsConfig : ScriptableObject
 public class UnitConfig
 {
     public string ItemId;
-    public PlayerUnitType UnitType;
     public int HP;
     public float Damage;
+    public Unit Prefab;
 }
 
 [Serializable]
