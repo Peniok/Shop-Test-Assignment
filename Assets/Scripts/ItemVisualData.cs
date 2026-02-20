@@ -14,6 +14,7 @@ public abstract class OfferData
 {
     public string ItemId;
     public int Price;
+    public PriceType PriceType;
 
     public abstract ItemType ItemType { get;}
 }
@@ -43,4 +44,10 @@ public enum ItemType
     Character,
     Currency,
     Booster
+}
+
+public enum PriceType
+{
+    Currency,
+    RealMoney
 }

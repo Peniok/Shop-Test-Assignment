@@ -1,20 +1,18 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour
 {
-    [SerializeField] private BaseOfferSlot baseOfferPrefab;
-    [SerializeField] private BaseOfferSlot currencyOfferPrefab;
-    [SerializeField] private BaseOfferSlot boosterOfferSlot;
-    [SerializeField] private Transform baseOfferTransformParent;
-    [SerializeField] private Transform boosterOfferTransformParent;
-    [SerializeField] private Transform currencyOfferTransformParent;
-
     [SerializeField] private ShopConfig shopConfig;
     [SerializeField] private CurrencyManager currencyManager;
     [SerializeField] private ItemsConfig itemsConfig;
-    [SerializeField] private ItemManager itemManager;
+    [SerializeField] private ItemsManager itemManager;
     [SerializeField] private DescriptionShower descriptionShower;
+    [SerializeField] private BaseOffersGroupController[] offersGroupControllers;
+    [SerializeField] private RectTransform layoutRoot;
 
     private Action<OfferData> onPurchaseClickAction;
     private Action<string> onInfoButtonClickAction;
@@ -24,41 +22,43 @@ public class ShopController : MonoBehaviour
         onPurchaseClickAction += OnPurchaseButtonClicked;
         onInfoButtonClickAction += descriptionShower.Show;
 
-        LoadCharacterOffers();
-        LoadBoosterOffers();
-        LoadCurrencyOffers();
+        LoadOffers();
+        StartCoroutine(ForceRebuildLayoutCall());
     }
 
-    public void LoadCharacterOffers()
+    IEnumerator ForceRebuildLayoutCall()
     {
-        for (int i = 0; i < shopConfig.CharacterOffers.Length; i++)
+        yield return null;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
+
+    }
+
+    private void LoadOffers()
+    {
+        for (int i = 0; i < offersGroupControllers.Length; i++)
         {
-            Instantiate(baseOfferPrefab, baseOfferTransformParent).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CharacterOffers[i].ItemId), shopConfig.CharacterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
+            offersGroupControllers[i].Init(itemsConfig, shopConfig, onPurchaseClickAction, onInfoButtonClickAction);
         }
     }
 
-    public void LoadBoosterOffers()
-    {
-        for (int i = 0; i < shopConfig.BoosterOffers.Length; i++)
-        {
-            Instantiate(boosterOfferSlot, boosterOfferTransformParent).Setup(itemsConfig.GetItemVisualDataById(shopConfig.BoosterOffers[i].ItemId), shopConfig.BoosterOffers[i], onPurchaseClickAction, onInfoButtonClickAction);
-        }
-    }
-
-    public void LoadCurrencyOffers()
-    {
-        for (int i = 0; i < shopConfig.CurrencyOffers.Length; i++)
-        {
-            Instantiate(currencyOfferPrefab, currencyOfferTransformParent).Setup(itemsConfig.GetItemVisualDataById(shopConfig.CurrencyOffers[i].ItemId), shopConfig.CurrencyOffers[i], onPurchaseClickAction,onInfoButtonClickAction);
-        }
-    }
 
     private void OnPurchaseButtonClicked(OfferData offerData)
     {
-        if (currencyManager.IfEnoughSpend(offerData.Price))
+        if(offerData.PriceType == PriceType.RealMoney && TrySpendRealMoney())
+        {
+            itemManager.AddItem(offerData);
+
+        }
+        else if(currencyManager.IfEnoughSpend(offerData.Price))
         {
             itemManager.AddItem(offerData);
         }
+    }
+
+    private bool TrySpendRealMoney()
+    {
+        //Call to API for purchasing check
+        return true;
     }
 
     private void OnDestroy()

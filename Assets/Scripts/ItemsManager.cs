@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class ItemManager
+public class ItemsManager : MonoBehaviour
 {
+    [SerializeField] private CurrencyManager currencyManager;
     public void AddItem(OfferData itemData)
     {
         if(itemData.ItemType == ItemType.Character)
@@ -14,7 +15,7 @@ public class ItemManager
         }
         else if(itemData.ItemType == ItemType.Currency)
         {
-            PlayerPrefs.SetInt("PlayerCurrency", PlayerPrefs.GetInt("PlayerCurrency") + (itemData as CurrencyOfferData).Value);
+            currencyManager.AddCurrency((itemData as CurrencyOfferData).Value);
         }
     }
 }
