@@ -6,19 +6,23 @@ public abstract class BaseOffersGroupController : MonoBehaviour
     [SerializeField] protected BaseOfferSlot offerSlotPrefab;
     [SerializeField] protected Transform offerSlotTransformParent;
 
+    private Action onOfferHidedAction;
+    private int hidedOffers;
+    private int spawnedOffers;
+
     public virtual void Init(Action<string> onInfoButtonClickAction)
     {
-        OfferData[] offers = GetOffers();
+        onOfferHidedAction += OnOfferHided;
 
-        int spawnedOffers = 0;
+        OfferData[] offers = GetOffers();
 
         for (int i = 0; i < offers.Length; i++)
         {
             if (offers[i].IsOneTimePurchasable == false || (GameServices.SavesManager.PurchasedOneTimeOffers.Contains(offers[i].OfferId) == false))
             {
                 ItemVisualData itemVisualData = GetItemVisualForOffers(offers[i]);
-                Instantiate(offerSlotPrefab, offerSlotTransformParent)
-                    .Setup(itemVisualData, offers[i], onInfoButtonClickAction);
+                BaseOfferSlot baseOfferSlot = Instantiate(offerSlotPrefab, offerSlotTransformParent);
+                baseOfferSlot.Setup(itemVisualData, offers[i], onInfoButtonClickAction, onOfferHidedAction);
                 spawnedOffers++;
             }
         }
@@ -30,6 +34,15 @@ public abstract class BaseOffersGroupController : MonoBehaviour
         else
         {
             return;
+        }
+    }
+
+    protected void OnOfferHided()
+    {
+        hidedOffers++;
+        if (spawnedOffers == hidedOffers)
+        {
+            gameObject.SetActive(false);
         }
     }
 

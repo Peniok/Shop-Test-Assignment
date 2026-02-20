@@ -14,10 +14,14 @@ public class BaseOfferSlot : MonoBehaviour
     [SerializeField] protected Button purchaseButton;
     [SerializeField] protected Button infoButton;
 
-    public virtual void Setup(ItemVisualData visualData, OfferData offerData, Action<string> infoButtonClicked)
+    private Action onOfferHidedAction;
+
+    public virtual void Setup(ItemVisualData visualData, OfferData offerData, Action<string> infoButtonClicked, Action onOfferHidedAction)
     {
         OfferData = offerData;
         ItemVisualData = visualData;
+
+        this.onOfferHidedAction += onOfferHidedAction;
 
         nameText.text = visualData.ItemName;
         if(offerData.PriceType == PriceType.Currency)
@@ -39,6 +43,7 @@ public class BaseOfferSlot : MonoBehaviour
         if(GameServices.PurchasingService.TryPurchase(OfferData, ItemVisualData) && OfferData.IsOneTimePurchasable)
         {
             gameObject.SetActive(false);
+            onOfferHidedAction.Invoke();
         }
     }
 }

@@ -6,9 +6,9 @@ public class CurrencyOfferSlot : BaseOfferSlot
 {
     [SerializeField] private TextMeshProUGUI amountOfCurrencyToReceive;
 
-    public override void Setup(ItemVisualData data, OfferData offerData, Action<string> infoButtonClicked)
+    public override void Setup(ItemVisualData data, OfferData offerData, Action<string> infoButtonClicked, Action onOfferHidedAction)
     {
-        base.Setup(data, offerData, infoButtonClicked);
+        base.Setup(data, offerData, infoButtonClicked, onOfferHidedAction);
         if (offerData is CurrencyOfferData currencyOfferData)
         {
             amountOfCurrencyToReceive.text = "+" + currencyOfferData.Value.ToString();

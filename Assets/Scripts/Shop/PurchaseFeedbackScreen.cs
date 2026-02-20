@@ -7,11 +7,14 @@ public class PurchaseFeedbackScreen : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Button closeButton;
+    [SerializeField] private CanvasGroup canvasGroup;
 
     private void Awake()
     {
         GameServices.PurchasingService.OnPurchaseCompleted += ShowPurchase;
         closeButton.onClick.AddListener(Hide);
+        canvasGroup.alpha = 1;
+        Hide();
     }
 
     public void ShowPurchase(PurchasedOfferModel purchasedOfferModel)
