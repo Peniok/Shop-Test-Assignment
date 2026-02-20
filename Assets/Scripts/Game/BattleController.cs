@@ -15,7 +15,7 @@ public class BattleController : MonoBehaviour
     private Action<Unit> onDieAction;
     private Action onBattleEndedAction;
 
-    public void Init(Action onBattleEndedAction,List<string> purchasedCharactersId, List<int> pickedCharactersToBattle)
+    public void Init(Action onBattleEndedAction, List<string> purchasedCharactersId, List<int> pickedCharactersToBattle)
     {
         this.onBattleEndedAction = onBattleEndedAction;
 
@@ -67,18 +67,24 @@ public class BattleController : MonoBehaviour
     {
         playerUnits.Remove(unit);
         enemyUnits.Remove(unit);
+
+        CheckForLevelEnd();
+    }
+
+    private void CheckForLevelEnd()
+    {
         if (playerUnits.Count == 0)
         {
             for (int i = 0; i < enemyUnits.Count; i++)
             {
-                enemyUnits[i].enabled =false;
+                enemyUnits[i].enabled = false;
             }
 
             StartCoroutine(WaitAndShowEndOfBattle());
         }
         else if (enemyUnits.Count == 0)
         {
-            for (int i = 0; i < enemyUnits.Count; i++)
+            for (int i = 0; i < playerUnits.Count; i++)
             {
                 playerUnits[i].enabled = false;
             }
@@ -86,6 +92,7 @@ public class BattleController : MonoBehaviour
             StartCoroutine(WaitAndShowEndOfBattle());
         }
     }
+
     IEnumerator WaitAndShowEndOfBattle()
     {
         yield return new WaitForSeconds(1);

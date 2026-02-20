@@ -2628,7 +2628,7 @@ MonoBehaviour:
   mainPage: {fileID: 2103118704}
   inventoryPage: {fileID: 1795357242}
   pickMinimumOnePlayerNotif: {fileID: 1904819775}
-  battleScenePrefab: {fileID: 8100517047792057908, guid: 98a8f27b05fb48a43b9222d42c791b2c, type: 3}
+  battleScenePrefab: {fileID: 6151395627457682313, guid: 98a8f27b05fb48a43b9222d42c791b2c, type: 3}
   startLevel: {fileID: 1740732580}
 --- !u!1 &946083637
 GameObject:
@@ -2785,7 +2785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &997571967

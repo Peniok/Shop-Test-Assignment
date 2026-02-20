@@ -7,7 +7,7 @@ public class SavesManager
     public List<string> PurchasedCharactersId = new List<string>();
     public List<string> PurchasedOneTimeOffers = new List<string>();
 
-    public static int MaxCountOfPickedCharacters=3;
+    public static int MaxCountOfPickedCharacters = 3;
 
     public SavesManager()
     {
@@ -18,7 +18,7 @@ public class SavesManager
     {
         PickedCharactersToBattle.Insert(0, indexOfNewPickedCharacter);
 
-        if (PickedCharactersToBattle.Count == MaxCountOfPickedCharacters) // Max Can be 3 Picked characters
+        if (PickedCharactersToBattle.Count == (MaxCountOfPickedCharacters + 1))
         {
             PickedCharactersToBattle.RemoveAt(3);
         }
