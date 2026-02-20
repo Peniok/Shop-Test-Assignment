@@ -73,23 +73,19 @@ public class BattleController : MonoBehaviour
 
     private void CheckForLevelEnd()
     {
-        if (playerUnits.Count == 0)
+        if (playerUnits.Count == 0 || enemyUnits.Count == 0)
         {
-            for (int i = 0; i < enemyUnits.Count; i++)
-            {
-                enemyUnits[i].enabled = false;
-            }
+            DisableAllSurvivedUnits(playerUnits.Count == 0 ? enemyUnits : playerUnits);
 
             StartCoroutine(WaitAndShowEndOfBattle());
         }
-        else if (enemyUnits.Count == 0)
-        {
-            for (int i = 0; i < playerUnits.Count; i++)
-            {
-                playerUnits[i].enabled = false;
-            }
 
-            StartCoroutine(WaitAndShowEndOfBattle());
+        void DisableAllSurvivedUnits(List<Unit> units)
+        {
+            for (int i = 0; i < units.Count; i++)
+            {
+                units[i].enabled = false;
+            }
         }
     }
 
