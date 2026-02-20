@@ -28,6 +28,13 @@ public class InventoryPageController : MonoBehaviour
         SpawnNotEnoughItems();
     }
 
+    public void AddItem(string characterId)
+    {
+        ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemSlotsParent);
+        itemSlot.Setup(itemsConfig.GetItemVisualDataById(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
+        allItems.Add(itemSlot);
+    }
+
     private void SpawnItems()
     {
         for (int i = 0; i < savesManager.PurchasedCharactersId.Count; i++)
@@ -36,13 +43,6 @@ public class InventoryPageController : MonoBehaviour
         }
 
         SetPickedCharcters();
-    }
-
-    public void AddItem(string characterId)
-    {
-        ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemSlotsParent);
-        itemSlot.Setup(itemsConfig.GetItemVisualDataById(characterId), characterId, onInfoButtonClickAction, onCharacterChoosedAction);
-        allItems.Add(itemSlot);
     }
 
     private void SetPickedCharcters()
@@ -78,5 +78,10 @@ public class InventoryPageController : MonoBehaviour
         savesManager.AddCharacterToBattle(indexOfNewPickedCharacter);
 
         SetPickedCharcters();
+    }
+
+    private void OnDisable()
+    {
+        descriptionShower.Hide();
     }
 }

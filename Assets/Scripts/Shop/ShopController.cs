@@ -13,8 +13,9 @@ public class ShopController : MonoBehaviour
     [SerializeField] private DescriptionShower descriptionShower;
     [SerializeField] private BaseOffersGroupController[] offersGroupControllers;
     [SerializeField] private RectTransform layoutRoot;
+    [SerializeField] private PurchaseFeedbackScreen purchaseFeedbackScreen;
 
-    private Action<OfferData> onPurchaseClickAction;
+    private Action<OfferData, ItemVisualData> onPurchaseClickAction;
     private Action<string> onInfoButtonClickAction;
 
     private void Awake()
@@ -42,17 +43,16 @@ public class ShopController : MonoBehaviour
     }
 
 
-    private void OnPurchaseButtonClicked(OfferData offerData)
+    private void OnPurchaseButtonClicked(OfferData offerData,ItemVisualData itemVisualData)
     {
-        if(offerData.PriceType == PriceType.RealMoney && TrySpendRealMoney())
+        if(offerData.PriceType == PriceType.RealMoney && TrySpendRealMoney() 
+            || (offerData.PriceType == PriceType.Currency && currencyManager.IfEnoughSpend(offerData.Price)))
         {
             itemManager.AddItem(offerData);
 
         }
-        else if(currencyManager.IfEnoughSpend(offerData.Price))
-        {
-            itemManager.AddItem(offerData);
-        }
+
+        purchaseFeedbackScreen.ShowPurchase(itemVisualData);
     }
 
     private bool TrySpendRealMoney()
@@ -60,9 +60,15 @@ public class ShopController : MonoBehaviour
         //Call to API for purchasing check
         return true;
     }
+    private void OnDisable()
+    {
+        purchaseFeedbackScreen.gameObject.SetActive(false);
+        descriptionShower.gameObject.SetActive(false);
+    }
 
     private void OnDestroy()
     {
         onPurchaseClickAction -= OnPurchaseButtonClicked;
     }
+
 }

@@ -5,7 +5,7 @@ public class CurrencyOffersGroupController : BaseOffersGroupController
 {
     private ItemVisualData itemVisualData;
 
-    public override void Init(ItemsConfig itemsConfig, ShopConfig shopConfig, Action<OfferData> onPurchaseClickAction, Action<string> onInfoButtonClickAction)
+    public override void Init(ItemsConfig itemsConfig, ShopConfig shopConfig, Action<OfferData, ItemVisualData> onPurchaseClickAction, Action<string> onInfoButtonClickAction)
     {
         PrepareItemVisualData(shopConfig.CurrencyIcon);
 

@@ -152,14 +152,6 @@ PrefabInstance:
       propertyPath: m_Type
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4324774293049481726, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -304
-      objectReference: {fileID: 0}
-    - target: {fileID: 4324774293049481726, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 88
-      objectReference: {fileID: 0}
     - target: {fileID: 6065272827046891482, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_Name
       value: BoosterOfferSlot
@@ -180,6 +172,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -7
       objectReference: {fileID: 0}
+    - target: {fileID: 6612560921581210706, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8580286285322991341, guid: 7f9865cf6ac20f7468e13d5a5daff8ef, type: 3}
     - target: {fileID: 6688884762791218241, guid: 3f3d9c0deb04cd54a9bf80abcca2d19b, type: 3}
       propertyPath: m_SizeDelta.x
       value: -343.1044

@@ -11,13 +11,13 @@ public class BaseOfferSlot : MonoBehaviour
     [SerializeField] protected Button purchaseButton;
     [SerializeField] protected Button infoButton;
 
-    public virtual void Setup(ItemVisualData data, OfferData offerData, Action<OfferData> onPurchaseClicked, Action<string> infoButtonClicked)
+    public virtual void Setup(ItemVisualData data, OfferData offerData, Action<OfferData, ItemVisualData> onPurchaseClicked, Action<string> infoButtonClicked)
     {
         nameText.text = data.ItemName;
         priceText.text = $"{offerData.Price} $";
         iconImage.sprite = data.Icon;
 
-        purchaseButton.onClick.AddListener(() => onPurchaseClicked?.Invoke(offerData));
+        purchaseButton.onClick.AddListener(() => onPurchaseClicked?.Invoke(offerData, data));
         infoButton.onClick.AddListener(() => infoButtonClicked?.Invoke(data.Description));
     }
 }

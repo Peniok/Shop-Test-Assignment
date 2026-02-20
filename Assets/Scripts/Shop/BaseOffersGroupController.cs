@@ -9,7 +9,7 @@ public abstract class BaseOffersGroupController : MonoBehaviour
     protected ItemsConfig itemsConfig;
     protected ShopConfig shopConfig;
 
-    public virtual void Init(ItemsConfig itemsConfig, ShopConfig shopConfig, Action<OfferData> onPurchaseClickAction, Action<string> onInfoButtonClickAction)
+    public virtual void Init(ItemsConfig itemsConfig, ShopConfig shopConfig, Action<OfferData, ItemVisualData> onPurchaseClickAction, Action<string> onInfoButtonClickAction)
     {
         this.shopConfig = shopConfig;
         this.itemsConfig = itemsConfig;

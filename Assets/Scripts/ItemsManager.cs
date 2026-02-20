@@ -12,7 +12,7 @@ public class ItemsManager : MonoBehaviour
         }
         else if (itemData.ItemType == ItemType.Booster)
         {
-            PlayerPrefs.SetString("PlayerBoosters", itemData.ItemId);
+            // Booster implementation Logic
         }
         else if(itemData.ItemType == ItemType.Currency)
         {
